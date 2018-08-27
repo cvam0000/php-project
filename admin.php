@@ -11,14 +11,14 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
 
  {
    // Get image name
-   $image = $_FILES['image']['name'];
+   $image = mysqli_real_escape_string($conn,$_FILES['image']['name']);
    // Get text
    //$image_text = mysqli_real_escape_string($db, $_POST['image_text']);
 
-    $img_title=$_POST['title'];
-    $image_title_description=$_POST['itd'];
+    $img_title=mysqli_real_escape_string($conn,$_POST['title']);
+    $image_title_description=mysqli_real_escape_string($conn,$_POST['itd']);
     $post_time= date(DATE_RFC822);//for post date and time
-    $img_date= $_POST['date_of'];
+    $img_date= mysqli_real_escape_string($conn,$_POST['date_of']);
    $target = "pics/".basename($image);
 
     $sql = "INSERT INTO images (image,title,date,description,date_of) VALUES ('$image', '$img_title','$post_time','$image_title_description','$img_date')";
